@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../assets/css/app.css">
 
     <script>
-        const BASE_URL = "{BASE_URL}";
+        const BASE_URL = "<?=BASE_URL?>";
     </script>
 </head>
 <body>

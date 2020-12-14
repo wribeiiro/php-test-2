@@ -1,30 +1,31 @@
-$('#addSpeaker').click(() => {
+$('#addProduct').click(() => {
     $('#id').val('')
     $('#name').val('')
-    $('#modalSpeakers').modal('show')
+    $('#price').val('')
+    $('#type').prop('selectedIndex',0)
+    $('#modalProducts').modal('show')
 })
 
-function datatableSpeakers() {
-    tableSpeakers = $(`#tableSpeakers`).DataTable({
+function datatableProducts() {
+    tableProducts = $(`#tableProducts`).DataTable({
         sPaginationType: "full_numbers",
         destroy: true,
         responsive: false,
         ajax: {
-            url: `${BASE_URL}/api/v1/speakers`,
+            url: `${BASE_URL}/products/get`,
             dataType: "JSON",
             cache: false,
             dataSrc: (data) => {
                 return data.data || []
             },
             error: (e) => {
-                $("#addSpeaker").removeAttr("disabled").find("i").removeClass("fa-spinner fa-spin").addClass("fa-plus")
+                $("#addProduct").removeAttr("disabled").find("i").removeClass("fa-spinner fa-spin").addClass("fa-plus")
             },
             beforeSend: (xhr) => {
-                xhr.setRequestHeader(`Authorization`, `Bearer ${localStorage.getItem('access_token')}`)
-                $("#addSpeaker").attr("disabled", true).find("i").removeClass("fa-plus").addClass("fa-spinner fa-spin")
+                $("#addProduct").attr("disabled", true).find("i").removeClass("fa-plus").addClass("fa-spinner fa-spin")
             },
             complete: () => {
-                $("#addSpeaker").removeAttr("disabled").find("i").removeClass("fa-spinner fa-spin").addClass("fa-plus")
+                $("#addProduct").removeAttr("disabled").find("i").removeClass("fa-spinner fa-spin").addClass("fa-plus")
             }
         },
         order: [[0, "DESC"]],
@@ -38,38 +39,45 @@ function datatableSpeakers() {
                 class: "text-left",
             },
             {
+                data: "price",
+                class: "text-left",
+            },
+            {
+                data: "type",
+                class: "text-left",
+            },
+            {
                 orderable: false,
                 data: null,
                 defaultContent: ``,
                 render: (data, type, row, meta) => {
                     return `
-                    <button type="button" class="btn btn-purple btn-sm" onclick="editModal('${data.id}', '${data.name}')"> <i class="fa fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger btn-sm"  onclick="deleteSpeaker('${data.id}')"> <i class="fa fa-trash"></i></button>`
+                    <button type="button" class="btn btn-purple btn-sm" onclick="editModal('${data.id}', '${data.name}', '${data.price}', '${data.type}')"> <i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-danger btn-sm"  onclick="deleteProduct('${data.id}')"> <i class="fa fa-trash"></i></button>`
                 }
             }
         ]
     })
 }
 
-function editModal(id, name) {
-    $('#id').val('').val(id)
-    $('#name').val('').val(name)
-    $('#modalSpeakers').modal('show')
+function editModal(id, name, price, type) {
+    $('#id').val(id)
+    $('#name').val(name)
+    $('#price').val(price)
+    $('#type').val(type)
+    $('#modalProducts').modal('show')
 }
 
 function deleteSpeaker(id) {
     $.ajax({
-        url: `${BASE_URL}/api/v1/speakers/delete/${id}`,
+        url: `${BASE_URL}/products/delete/${id}`,
         method: "DELETE",
         dataType: 'JSON',
         success: (data) => {
             if (data.code === 200) {
-                toastr.success('Speaker is deleted!', 'Success!')
-                tableSpeakers.ajax.reload()
+                toastr.success('Product is deleted!', 'Success!')
+                tableProducts.ajax.reload()
             }
-        },
-        beforeSend: (xhr) => {
-            xhr.setRequestHeader(`Authorization`, `Bearer ${localStorage.getItem('access_token')}`)
         },
         error: (e) => {
             toastr.error('Ops, a error ocurred!', 'Error!')
@@ -77,24 +85,36 @@ function deleteSpeaker(id) {
     })
 }
 
-$('#saveSpeaker').on('click', () => {
+$('#saveProducts').on('click', () => {
 
     const params = {
-        url: `${BASE_URL}/api/v1/speakers/create`,
+        url: `${BASE_URL}/products/create`,
         method: 'POST',
         data: {
-            name: $('#name').val().trim()
+            name: $('#name').val().trim(),
+            price: $('#price').val().trim(),
+            type: $('#type option:selected').val()
         }
     }
 
     if ($('#id').val().trim()) {
-        params.url     = `${BASE_URL}/api/v1/speakers/update/${$('#id').val().trim()}`
+        params.url     = `${BASE_URL}/products/update/${params.data.id}`
         params.method  = 'PUT'
         params.data.id = parseInt($('#id').val().trim())
     }
 
     if ($('#name').val().trim() === "") {
         toastr.warning('Name is required', 'Warning')
+        return
+    }
+    
+    if ($('#price').val().trim() === "") {
+        toastr.warning('Price is required', 'Warning')
+        return
+    }
+
+    if ($('#type').val().trim() === "") {
+        toastr.warning('Type is required', 'Warning')
         return
     }
 
@@ -105,15 +125,12 @@ $('#saveSpeaker').on('click', () => {
         dataType: 'JSON',
         success: (data) => {
             if (data.code === 200 || data.code === 201) {
-                toastr.success('Speaker created/updated!', 'Success!')
+                toastr.success('Product created/updated!', 'Success!')
             } else {
                 toastr.warning(data.data, 'Warning!')
             }
 
-            tableSpeakers.ajax.reload()
-        },
-        beforeSend: (xhr) => {
-            xhr.setRequestHeader(`Authorization`, `Bearer ${localStorage.getItem('access_token')}`)
+            tableProducts.ajax.reload()
         },
         error: (e) => {
             console.log(e)
@@ -121,5 +138,5 @@ $('#saveSpeaker').on('click', () => {
         }
     })
 
-    $('#modalSpeakers').modal('hide')
+    $('#modalProducts').modal('hide')
 })

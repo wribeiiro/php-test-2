@@ -19,4 +19,24 @@ class ProductsTypeController extends Controller {
         Util::view('products/index');
         Util::view('layout/footer');
     }
+
+    public function getProductTypes() {
+
+    }
+
+    public function getProductType(int $id) {
+        
+    }
+
+    public function create() {
+
+    }
+
+    public function update(int $id) {
+
+    }
+
+    public function delete(int $id) {
+
+    }
 }

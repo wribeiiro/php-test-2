@@ -32,7 +32,7 @@
         </div>
 
         <div class="form-group">
-            <button class="btn btn-purple" type="button" id="addSpeaker"> <i class="fa fa-plus"></i> Add Speaker</button>
+            <button class="btn btn-purple" type="button" id="addSpeaker"> <i class="fa fa-plus"></i> Add Sale</button>
         </div>
 
         <table class="table table-striped table-sm" id="tableSpeakers" style="width: 100%">

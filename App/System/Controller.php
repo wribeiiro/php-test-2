@@ -2,35 +2,23 @@
 
 namespace App\System;
 
-use CoffeeCode\Router;
-
 class Controller {
 
-    /**
-     * @var Router
-     */
-    protected $router;
-
-    public function __construct($router)
-    {
-        $this->router = $router;
-    }
-
-    public function inputGet(int $filter = 0) {
+    public function inputGet($name = null, int $filter = FILTER_DEFAULT) {
         
-        if ($filter > 0) {
+        if (is_array($name)) {
             return filter_var_array($_GET, $filter);
         }
 
-        return $_GET;
+        return filter_var($_GET[$name], $filter);
     }
 
-    public function inputPost(int $filter = 0) {
+    public function inputPost($name = null, int $filter = FILTER_DEFAULT) {
         
-        if ($filter > 0) {
+        if (is_array($name)) {
             return filter_var_array($_POST, $filter);
         }
 
-        return $_POST;
+        return filter_var($_POST[$name], $filter);
     }
 }

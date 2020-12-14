@@ -1,31 +1,33 @@
 <?php
 
-namespace App\Models;
+namespace App\Repositories;
 
-use App\System\Model;
+use App\Models\SaleModel;
 
-class HomeModel extends Model {
+class SalesRepository {
+
+    private $model;
 
     public function __construct() {
-        parent::__construct('crud');
+        $this->model = new SaleModel(); 
     }
-
+    
     public function get(int $id = 0) {
         $query = "SELECT * FROM {this->table}";
         
         if ($id > 0) {
             $query .= " WHERE id = {$id} LIMIT 1";
 
-            return $this->db->query($query)->fetch();
+            return $this->model->db->query($query)->fetch();
         }
 
-        return $this->db->query($query)->fetchAll();
+        return $this->model->db->query($query)->fetchAll();
     }
 
-    public function insert(array $data) {
+    public function create(array $data) {
 
         $query   = "INSERT INTO {$this->table} (campo) VALUES (value) ";
-        $prepare = $this->db->prepare($query);
+        $prepare = $this->model->db->prepare($query);
 
         $prepare->bindValue(':nome', $data['nome']);
 
@@ -35,7 +37,7 @@ class HomeModel extends Model {
     public function update(int $id, array $data) {
 
         $query   = "UPDATE {$this->table} SET WHERE  id=:id ";
-        $prepare = $this->db->prepare($query);
+        $prepare = $this->model->db->prepare($query);
 
         $prepare->bindValue(':id', $id);
         
@@ -44,11 +46,10 @@ class HomeModel extends Model {
 
     public function delete(int $id) {
         $query   = "DELETE FROM {$this->table} WHERE id = :id";
-        $prepare = $this->db->prepare($query);
+        $prepare = $this->model->db->prepare($query);
 
         $prepare->bindValue(':id', $id);
 
         return $prepare->execute();
     }
-
 }
