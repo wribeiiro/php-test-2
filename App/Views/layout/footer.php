@@ -7,6 +7,12 @@
 <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js "></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.5/jquery.inputmask.min.js"></script>
+
 <script src="../assets/js/app.js"></script>
+<script src="../assets/js/pages/products.js"></script>
+<script src="../assets/js/pages/products-type.js"></script>
+<script src="../assets/js/pages/sales.js"></script>
 </body>
 </html>

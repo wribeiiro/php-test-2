@@ -6,8 +6,8 @@ use App\System\Model;
 
 class ProductModel extends Model {
 
-    public function __construct() {
-        
-    }
+    protected string $description;
+    protected int $product_type_id;
+    protected float $price;
 
 }

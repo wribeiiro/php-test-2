@@ -21,3 +21,32 @@ function dateToYearMonthDay(strDate) {
 		return `${dateFormatted[2]}-${dateFormatted[1]}-${dateFormatted[0]}`
 	}
 }
+
+function numberFormat(number = 0, decimals = 2) {
+	return Number(number).toFixed(decimals)
+}
+
+function currencyToNumber(value) {
+
+    if (!value) {
+        value = 0;
+    }
+
+    if (value.length > 10) {
+        return isNaN(value) == false ? parseFloat(value) : parseFloat(value.replace(".", "").replace(",", ".").replace(".", ""))
+    }
+	
+	return isNaN(value) == false ? parseFloat(value) : parseFloat(value.replace(".", "").replace(",", "."))
+}
+
+$('.currency').inputmask('currency', {
+	autoUnmask: true,
+	radixPoint: ",",
+	groupSeparator: ".",
+	allowMinus: false,
+	prefix: '',
+	digits: 2,
+	digitsOptional: false,
+	rightAlign: true,
+	unmaskAsNumber: true
+})

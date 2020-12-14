@@ -1,4 +1,4 @@
-<div class="row form-group justify-content-center d-flex mt-5">
+<div class="row form-group justify-content-center d-flex mt-5" id="sectionProducts">
     <div class="col-12">
         <h2>List of Products</h2>
         <hr>
@@ -16,13 +16,31 @@
                     </div>
 
                     <div class="modal-body">
-                        <div class='form-group'>
-                            <label for='name'>Name: </label>
-                            <input type='text' class='form-control' id='name'>
-                        </div>
-                        <div class='form-group'>
-                            <label for='value'>Value: </label>
-                            <input type='text' class='form-control' id='value'>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class='form-group'>
+                                    <label for='description'>Description: </label>
+                                    <input type='text' class='form-control' id='description'>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class='form-group'>
+                                    <label for='price'>Price: </label>
+                                    <input type='text' class='form-control currency' id='price' value="0">
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class='form-group'>
+                                    <label for='productType'>Product Type: </label>
+                                    <select class="form-control" id="productType">
+                                        <option selected value=""><-- SELECT --></option>
+
+                                        <?php foreach ($productsType as $type): ?>
+                                        <option value="<?=$type->id?>"><?=strtoupper($type->description)?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -39,12 +57,13 @@
             <button class="btn btn-purple" type="button" id="addProduct"> <i class="fa fa-plus"></i> Add Product</button>
         </div>
 
-        <table class="table table-striped table-sm" id="tableSpeakers" style="width: 100%">
+        <table class="table table-striped table-sm" id="tableProducts" style="width: 100%">
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>Description</th>
                     <th>Price</th>
+                    <th>Product Type</th>
                     <th>Actions</th>
                 </tr>
             </thead>

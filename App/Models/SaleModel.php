@@ -6,7 +6,7 @@ use App\System\Model;
 
 class SaleModel extends Model {
 
-    public function __construct() {
-        parent::__construct('sales');
-    }
+    protected string $client_name;
+    protected int $total_price;
+    protected float $total_tax;
 }

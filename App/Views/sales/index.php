@@ -17,30 +17,42 @@
 
                     <div class="modal-body">
                         <div class='form-group'>
-                            <label for='name'>Name: </label>
-                            <input type='text' class='form-control' id='name'>
+                            <label for='clientName'>Client: </label>
+                            <input type='text' class='form-control' id='clientName'>
+                        </div>
+
+                        <div class='form-group'>
+                            <label for='totalTax'>Total Tax: </label>
+                            <input type='text' class='form-control' id='totalTax'>
+                        </div>
+
+                        <div class='form-group'>
+                            <label for='totalPrice'>Total Price: </label>
+                            <input type='text' class='form-control' id='totalPrice'>
                         </div>
                     </div>
 
                     <input type="hidden" id="id" value="">
 
                     <div class="modal-footer text-xs-center" style="background-color:#f5f5f5;">
-                        <button type="button" class="btn btn-purple" id="saveSpeaker">Save</button>
+                        <button type="button" class="btn btn-purple" id="saveSale">Save</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            <button class="btn btn-purple" type="button" id="addSpeaker"> <i class="fa fa-plus"></i> Add Sale</button>
+            <button class="btn btn-purple" type="button" id="addSale"> <i class="fa fa-plus"></i> Add Sale</button>
         </div>
 
-        <table class="table table-striped table-sm" id="tableSpeakers" style="width: 100%">
+        <table class="table table-striped table-sm" id="tableSales" style="width: 100%">
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
                     <th>Client</th>
-                    <th>Price</th>
+                    <th>Total Tax</th>
+                    <th>Total Price</th>
+                    <th>Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>

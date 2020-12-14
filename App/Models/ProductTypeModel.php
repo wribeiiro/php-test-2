@@ -6,8 +6,6 @@ use App\System\Model;
 
 class ProductTypeModel extends Model {
 
-    public function __construct() {
-        
-    }
-
+    protected string $description;
+    protected int $tax_percentage;
 }
