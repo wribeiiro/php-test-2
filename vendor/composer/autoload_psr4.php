@@ -7,6 +7,12 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'vendor\\' => array($vendorDir . ''),
+    'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
+    'PhpDocReader\\' => array($vendorDir . '/php-di/phpdoc-reader/src/PhpDocReader'),
+    'Pecee\\' => array($vendorDir . '/pecee/simple-router/src/Pecee'),
+    'Opis\\Closure\\' => array($vendorDir . '/opis/closure/src'),
+    'Invoker\\' => array($vendorDir . '/php-di/invoker/src'),
+    'DI\\' => array($vendorDir . '/php-di/php-di/src'),
     'CoffeeCode\\Router\\' => array($vendorDir . '/coffeecode/router/src'),
     'App\\' => array($baseDir . '/App'),
 );

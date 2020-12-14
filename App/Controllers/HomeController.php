@@ -22,18 +22,4 @@ class HomeController extends Controller {
         Util::view('home/index', $body);
         Util::view('layout/footer', $body);
     }
-
-    public function products() {
-        Util::view('layout/header');
-        Util::view('layout/menu');
-        Util::view('products/index');
-        Util::view('layout/footer');
-    }
-
-    public function productsType() {
-        Util::view('layout/header');
-        Util::view('layout/menu');
-        Util::view('products/index');
-        Util::view('layout/footer');
-    }
 }

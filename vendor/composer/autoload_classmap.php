@@ -6,9 +6,4 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\System\\Database' => $baseDir . '/App/System/Database.php',
-    'App\\System\\Model' => $baseDir . '/App/System/Model.php',
-    'CoffeeCode\\Router\\Dispatch' => $vendorDir . '/coffeecode/router/src/Dispatch.php',
-    'CoffeeCode\\Router\\Router' => $vendorDir . '/coffeecode/router/src/Router.php',
-    'CoffeeCode\\Router\\RouterTrait' => $vendorDir . '/coffeecode/router/src/RouterTrait.php',
 );

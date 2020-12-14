@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-purple">
-    <a class="navbar-brand" href="#">PHPTest</a>
+    <a class="navbar-brand" href="/">PHPTest</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="content" aria-expanded="false" aria-label="alt">
         <span class="navbar-toggler-icon"></span>
     </button>

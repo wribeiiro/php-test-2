@@ -1,7 +1,6 @@
 <?php
 
 define("ENVIRONMENT", "development");
-error_reporting(E_ALL);
 
 if (ENVIRONMENT == "development") {
 	define("BASE_URL", "http://localhost/php-test-2/");
