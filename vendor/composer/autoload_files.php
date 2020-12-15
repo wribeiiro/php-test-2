@@ -8,5 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     '538ca81a9a966a6716601ecf48f4eaef' => $vendorDir . '/opis/closure/functions.php',
     'b33e3d135e5d9e47d845c576147bda89' => $vendorDir . '/php-di/php-di/src/functions.php',
-    '4fc67ee899f3e8561c43db16a93483e2' => $baseDir . '/App/Config/config.php',
+    'a1aacc5ddbc5ea3e373c27c7d9e965fd' => $baseDir . '/app/Config/config.php',
 );

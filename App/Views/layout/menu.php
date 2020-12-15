@@ -6,10 +6,9 @@
 
     <div class="collapse navbar-collapse" id="content">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/"> <i class="fa fa-store-alt"></i> Sales</a>
             </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="products"> <i class="fa fa-cube"></i> Products</a>
             </li>
@@ -19,13 +18,10 @@
             </li>
         </ul>
         <ul class="navbar-nav my-2 my-lg-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
                     <i class="fa fa-user"></i> PHPTest(2)
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/"><i class="fa fa-arrow-left fa-fw"></i> Logout</a>
-                </div>
             </li>
         </ul>
     </div>

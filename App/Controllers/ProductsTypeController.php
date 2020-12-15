@@ -3,7 +3,8 @@
 namespace App\Controllers;
 
 use App\System\Controller;
-use App\Helpers\Util;
+use App\Helpers\View;
+use App\Helpers\Response;
 use App\Services\ProductsTypeService;
 
 class ProductsTypeController extends Controller {
@@ -15,29 +16,29 @@ class ProductsTypeController extends Controller {
     }
 
     public function index() {
-        Util::view('layout/header');
-        Util::view('layout/menu');
-        Util::view('products-type/index');
-        Util::view('layout/footer');
+        View::include('layout/header');
+        View::include('layout/menu');
+        View::include('products-type/index');
+        View::include('layout/footer');
     }
 
     public function getProductsType() {
 
         try {
-            $response['code'] = 200;
+            $response['code'] = Response::HTTP_OK;
             $response['data'] = $this->products_type_service->getAll();
         } catch (\Exception $e) {
-            $response['code'] = 500;
+            $response['code'] = Response::HTTP_INTERNAL_SERVER_ERROR;
             $response['data'] = $e->getMessage();
         }
 
-        return Util::response($response, $response['code']);
+        return Response::respond($response, $response['code']);
     }
 
     public function createProductType() {
         $data = $this->inputPost();
 
-        $response['code'] = 201;
+        $response['code'] = Response::HTTP_CREATED;
         $response['data'] = [];
 
         try {
@@ -51,17 +52,17 @@ class ProductsTypeController extends Controller {
             }
 
         } catch (\Exception $e) {
-            $response['code'] = 500;
+            $response['code'] = Response::HTTP_INTERNAL_SERVER_ERROR;
             $response['data'] = $e->getMessage();
         }
 
-        return Util::response($response, $response['code']);
+        return Response::respond($response, $response['code']);
     }
 
     public function updateProductType(int $id) {
         $data = $this->inputPost();
 
-        $response['code'] = 200;
+        $response['code'] = Response::HTTP_OK;
         $response['data'] = [];
 
         try {
@@ -75,23 +76,23 @@ class ProductsTypeController extends Controller {
             }
 
         } catch (\Exception $e) {
-            $response['code'] = 500;
+            $response['code'] = Response::HTTP_INTERNAL_SERVER_ERROR;
             $response['data'] = $e->getMessage();
         }
 
-        return Util::response($response, $response['code']);
+        return Response::respond($response, $response['code']);
     }
 
     public function deleteProductType(int $id) {
 
         try {
-            $response['code'] = 200;
+            $response['code'] = Response::HTTP_OK;
             $response['data'] = $this->products_type_service->delete($id);
         } catch (\Exception $e) {
-            $response['code'] = 500;
+            $response['code'] = Response::HTTP_INTERNAL_SERVER_ERROR;
             $response['data'] = $e->getMessage();
         }
 
-        return Util::response($response);
+        return Response::respond($response);
     }
 }

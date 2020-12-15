@@ -2,21 +2,8 @@
 
 namespace App\Helpers;
 
-class Util {
-    
-    /**
-     * response json
-     *
-     * @param array $array
-     * @return void
-     */
-    public static function response(array $array, int $code = 200): void {
-        http_response_code($code);
-		header("Content-Type: application/json");
-		echo json_encode($array);
-		exit;
-    }
-    
+class View {
+
     /**
      * Includes a view
      *
@@ -24,7 +11,7 @@ class Util {
      * @param array $options
      * @return string|null
      */
-    public static function view(string $viewName, array $data = []) {
+    public static function include(string $viewName, array $data = []) {
 
         extract($data);
 

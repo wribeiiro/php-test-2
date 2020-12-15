@@ -9,7 +9,7 @@ class ComposerStaticInit742803d27e68fc139af6df4fff5d92de
     public static $files = array (
         '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
         'b33e3d135e5d9e47d845c576147bda89' => __DIR__ . '/..' . '/php-di/php-di/src/functions.php',
-        '4fc67ee899f3e8561c43db16a93483e2' => __DIR__ . '/../..' . '/App/Config/config.php',
+        'a1aacc5ddbc5ea3e373c27c7d9e965fd' => __DIR__ . '/../..' . '/app/Config/config.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -44,7 +44,7 @@ class ComposerStaticInit742803d27e68fc139af6df4fff5d92de
     public static $prefixDirsPsr4 = array (
         'vendor\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/vendor',
+            0 => 'C:\\xampp\\htdocs\\php-test-2\\vendor',
         ),
         'Psr\\Container\\' => 
         array (
@@ -72,21 +72,33 @@ class ComposerStaticInit742803d27e68fc139af6df4fff5d92de
         ),
         'App\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/App',
+            0 => __DIR__ . '/../..' . '/app',
         ),
     );
 
     public static $classMap = array (
-        'App\\Controllers\\HomeController' => __DIR__ . '/../..' . '/App/Controllers/HomeController.php',
-        'App\\Controllers\\ProductsController' => __DIR__ . '/../..' . '/App/Controllers/ProductsController.php',
-        'App\\Controllers\\ProductsTypeController' => __DIR__ . '/../..' . '/App/Controllers/ProductsTypeController.php',
-        'App\\Helpers\\Util' => __DIR__ . '/../..' . '/App/Helpers/Util.php',
-        'App\\Models\\HomeModel' => __DIR__ . '/../..' . '/App/Models/HomeModel.php',
-        'App\\Models\\ProductModel' => __DIR__ . '/../..' . '/App/Models/ProductModel.php',
-        'App\\Models\\ProductTypeModel' => __DIR__ . '/../..' . '/App/Models/ProductTypeModel.php',
-        'App\\System\\Controller' => __DIR__ . '/../..' . '/App/System/Controller.php',
-        'App\\System\\Database' => __DIR__ . '/../..' . '/App/System/Database.php',
-        'App\\System\\Model' => __DIR__ . '/../..' . '/App/System/Model.php',
+        'App\\Controllers\\ProductsController' => __DIR__ . '/../..' . '/app/Controllers/ProductsController.php',
+        'App\\Controllers\\ProductsTypeController' => __DIR__ . '/../..' . '/app/Controllers/ProductsTypeController.php',
+        'App\\Controllers\\SalesController' => __DIR__ . '/../..' . '/app/Controllers/SalesController.php',
+        'App\\Helpers\\Response' => __DIR__ . '/../..' . '/app/Helpers/Response.php',
+        'App\\Helpers\\View' => __DIR__ . '/../..' . '/app/Helpers/View.php',
+        'App\\Models\\ProductModel' => __DIR__ . '/../..' . '/app/Models/ProductModel.php',
+        'App\\Models\\ProductTypeModel' => __DIR__ . '/../..' . '/app/Models/ProductTypeModel.php',
+        'App\\Models\\SaleModel' => __DIR__ . '/../..' . '/app/Models/SaleModel.php',
+        'App\\Repositories\\Interfaces\\RepositoryInterface' => __DIR__ . '/../..' . '/app/Repositories/Interfaces/RepositoryInterface.php',
+        'App\\Repositories\\ProductsRepository' => __DIR__ . '/../..' . '/app/Repositories/ProductsRepository.php',
+        'App\\Repositories\\ProductsTypeRepository' => __DIR__ . '/../..' . '/app/Repositories/ProductsTypeRepository.php',
+        'App\\Repositories\\SalesRepository' => __DIR__ . '/../..' . '/app/Repositories/SalesRepository.php',
+        'App\\Services\\ProductsService' => __DIR__ . '/../..' . '/app/Services/ProductsService.php',
+        'App\\Services\\ProductsTypeService' => __DIR__ . '/../..' . '/app/Services/ProductsTypeService.php',
+        'App\\Services\\SalesService' => __DIR__ . '/../..' . '/app/Services/SalesService.php',
+        'App\\System\\Controller' => __DIR__ . '/../..' . '/app/System/Controller.php',
+        'App\\System\\Database' => __DIR__ . '/../..' . '/app/System/Database.php',
+        'App\\Validations\\ProductsTypeValidation' => __DIR__ . '/../..' . '/app/Validations/ProductsTypeValidation.php',
+        'App\\Validations\\ProductsValidation' => __DIR__ . '/../..' . '/app/Validations/ProductsValidation.php',
+        'App\\Validations\\SalesItemValidation' => __DIR__ . '/../..' . '/app/Validations/SalesItemValidation.php',
+        'App\\Validations\\SalesValidation' => __DIR__ . '/../..' . '/app/Validations/SalesValidation.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DI\\Annotation\\Inject' => __DIR__ . '/..' . '/php-di/php-di/src/Annotation/Inject.php',
         'DI\\Annotation\\Injectable' => __DIR__ . '/..' . '/php-di/php-di/src/Annotation/Injectable.php',
         'DI\\CompiledContainer' => __DIR__ . '/..' . '/php-di/php-di/src/CompiledContainer.php',
@@ -115,7 +127,6 @@ class ComposerStaticInit742803d27e68fc139af6df4fff5d92de
         'DI\\Definition\\ObjectDefinition\\MethodInjection' => __DIR__ . '/..' . '/php-di/php-di/src/Definition/ObjectDefinition/MethodInjection.php',
         'DI\\Definition\\ObjectDefinition\\PropertyInjection' => __DIR__ . '/..' . '/php-di/php-di/src/Definition/ObjectDefinition/PropertyInjection.php',
         'DI\\Definition\\Reference' => __DIR__ . '/..' . '/php-di/php-di/src/Definition/Reference.php',
-        'DI\\Definition\\Resolver\\ArrayResolver' => __DIR__ . '/..' . '/php-di/php-di/src/Definition/Resolver/ArrayResolver.php',
         'DI\\Definition\\Resolver\\DecoratorResolver' => __DIR__ . '/..' . '/php-di/php-di/src/Definition/Resolver/DecoratorResolver.php',
         'DI\\Definition\\Resolver\\DefinitionResolver' => __DIR__ . '/..' . '/php-di/php-di/src/Definition/Resolver/DefinitionResolver.php',
         'DI\\Definition\\Resolver\\EnvironmentVariableResolver' => __DIR__ . '/..' . '/php-di/php-di/src/Definition/Resolver/EnvironmentVariableResolver.php',
@@ -130,7 +141,6 @@ class ComposerStaticInit742803d27e68fc139af6df4fff5d92de
         'DI\\Definition\\Source\\DefinitionArray' => __DIR__ . '/..' . '/php-di/php-di/src/Definition/Source/DefinitionArray.php',
         'DI\\Definition\\Source\\DefinitionFile' => __DIR__ . '/..' . '/php-di/php-di/src/Definition/Source/DefinitionFile.php',
         'DI\\Definition\\Source\\DefinitionNormalizer' => __DIR__ . '/..' . '/php-di/php-di/src/Definition/Source/DefinitionNormalizer.php',
-        'DI\\Definition\\Source\\DefinitionSource' => __DIR__ . '/..' . '/php-di/php-di/src/Definition/Source/DefinitionSource.php',
         'DI\\Definition\\Source\\MutableDefinitionSource' => __DIR__ . '/..' . '/php-di/php-di/src/Definition/Source/MutableDefinitionSource.php',
         'DI\\Definition\\Source\\NoAutowiring' => __DIR__ . '/..' . '/php-di/php-di/src/Definition/Source/NoAutowiring.php',
         'DI\\Definition\\Source\\ReflectionBasedAutowiring' => __DIR__ . '/..' . '/php-di/php-di/src/Definition/Source/ReflectionBasedAutowiring.php',
@@ -167,7 +177,6 @@ class ComposerStaticInit742803d27e68fc139af6df4fff5d92de
         'Opis\\Closure\\ISecurityProvider' => __DIR__ . '/..' . '/opis/closure/src/ISecurityProvider.php',
         'Opis\\Closure\\ReflectionClosure' => __DIR__ . '/..' . '/opis/closure/src/ReflectionClosure.php',
         'Opis\\Closure\\SecurityException' => __DIR__ . '/..' . '/opis/closure/src/SecurityException.php',
-        'Opis\\Closure\\SecurityProvider' => __DIR__ . '/..' . '/opis/closure/src/SecurityProvider.php',
         'Opis\\Closure\\SelfReference' => __DIR__ . '/..' . '/opis/closure/src/SelfReference.php',
         'Opis\\Closure\\SerializableClosure' => __DIR__ . '/..' . '/opis/closure/src/SerializableClosure.php',
         'Pecee\\Controllers\\IResourceController' => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee/Controllers/IResourceController.php',
@@ -193,7 +202,6 @@ class ComposerStaticInit742803d27e68fc139af6df4fff5d92de
         'Pecee\\SimpleRouter\\Exceptions\\HttpException' => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee/SimpleRouter/Exceptions/HttpException.php',
         'Pecee\\SimpleRouter\\Exceptions\\NotFoundHttpException' => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee/SimpleRouter/Exceptions/NotFoundHttpException.php',
         'Pecee\\SimpleRouter\\Handlers\\CallbackExceptionHandler' => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee/SimpleRouter/Handlers/CallbackExceptionHandler.php',
-        'Pecee\\SimpleRouter\\Handlers\\DebugEventHandler' => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee/SimpleRouter/Handlers/DebugEventHandler.php',
         'Pecee\\SimpleRouter\\Handlers\\EventHandler' => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee/SimpleRouter/Handlers/EventHandler.php',
         'Pecee\\SimpleRouter\\Handlers\\IEventHandler' => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee/SimpleRouter/Handlers/IEventHandler.php',
         'Pecee\\SimpleRouter\\Handlers\\IExceptionHandler' => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee/SimpleRouter/Handlers/IExceptionHandler.php',

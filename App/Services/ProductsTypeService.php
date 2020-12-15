@@ -47,21 +47,21 @@ class ProductsTypeService extends Controller {
         }
 
         try {
-            $product = $this->products_type_repository->update($id, $data);
+            $productType = $this->products_type_repository->update($id, $data);
         } catch (\Exception $e) {
-            $product = $e->getMessage();
+            $productType = $e->getMessage();
         }
 
-        return $product;
+        return $productType;
     }
 
     public function delete(int $id) {
         try {
-            $product = $this->products_type_repository->delete($id);
+            $productType = $this->products_type_repository->delete($id);
         } catch (\Exception $e) {
-            $product = $e->getMessage();
+            $productType = $e->getMessage();
         }
 
-        return $product;
+        return $productType;
     }
 }

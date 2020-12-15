@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Validations;
-
+use App\Helpers\Response;
 class ProductsValidation {
 
     private $validations = null;
@@ -9,6 +9,7 @@ class ProductsValidation {
     public function makeValidation(array $data):? array {
 
         if (isset($data) && !empty($data)) {
+            
             if (!isset($data['description']) || empty($data['description'])) {
                 $this->validations[] = "Description is required. ";
             }
@@ -35,7 +36,7 @@ class ProductsValidation {
             
             if ($this->validations !== null) {
                 return [
-                    "code" => 400,
+                    "code" => Response::HTTP_BAD_REQUEST,
                     "data" => implode(" ", $this->validations)
                 ];
             }

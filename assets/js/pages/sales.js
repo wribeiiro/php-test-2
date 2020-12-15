@@ -61,6 +61,13 @@ if ($('#sectionSales').length) {
                     class: "text-left",
                 },
                 {
+                    data: "total_price",
+                    class: "text-right",
+                    render: function(data) {
+                        return numberFormat(data)
+                    }
+                },
+                {
                     data: "total_tax",
                     class: "text-right",
                     render: function(data) {
@@ -68,7 +75,7 @@ if ($('#sectionSales').length) {
                     }
                 },
                 {
-                    data: "total_price",
+                    data: "total_sale",
                     class: "text-right",
                     render: function(data) {
                         return numberFormat(data)
@@ -122,6 +129,7 @@ if ($('#sectionSales').length) {
         })
     }
 
+    
     function deleteSale(id) {
         $.ajax({
             url: `${BASE_URL}sales/delete/${id}`,
@@ -175,11 +183,11 @@ if ($('#sectionSales').length) {
             strItem = `<tr class="deleteItem">
                             <td>${$('#productName option:selected').val()}</td>
                             <td>${$('#productName option:selected').text()}</td>
-                            <td>${numberFormat($('#price').val())}</td>
-                            <td>${numberFormat($('#quantity').val())}</td>
-                            <td>${numberFormat($('#tax').val())}</td>
-                            <td>${numberFormat($('#totalItem').val())}</td>
-                            <td><button type="button" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i></button></td>
+                            <td class="text-right">${numberFormat($('#price').val())}</td>
+                            <td class="text-right">${numberFormat($('#quantity').val())}</td>
+                            <td class="text-right">${numberFormat(calculateTax(($('#price').val() * $('#quantity').val()), $('#tax').val()))}</td>
+                            <td class="text-right">${numberFormat($('#totalItem').val())}</td>
+                            <td class="text-center"><button type="button" class="btn btn-danger btn-sm"> <i class="fa fa-trash"></i></button></td>
                         </tr>`
 
             $('#tableItensSales').append(strItem)
@@ -194,20 +202,22 @@ if ($('#sectionSales').length) {
 
     function populateTableItems(data) {
         let strItem = ``
-
+        
         if (!data) {
             return
         }
+
+        $('#tableItensSales tbody').empty()
 
         data.forEach(el => {
             strItem += `<tr class="deleteItem">
                             <td>${el.product_id}</td>
                             <td>${el.product_name}</td>
-                            <td>${numberFormat(el.price)}</td>
-                            <td>${numberFormat(el.tax)}</td>
-                            <td>${numberFormat(el.quantity)}</td>
-                            <td>${numberFormat(calculateItem(el.price, el.quantity, el.tax))}</td>
-                            <td><button type="button" class="btn btn-danger btn-sm" disabled> <i class="fa fa-trash"></i></button></td>
+                            <td class="text-right">${numberFormat(el.price)}</td>
+                            <td class="text-right">${numberFormat(el.quantity)}</td>
+                            <td class="text-right">${numberFormat(el.tax)}</td>
+                            <td class="text-right">${numberFormat(calculateItem(el.price, el.quantity, el.tax))}</td>
+                            <td class="text-center"><button type="button" class="btn btn-danger btn-sm" disabled> <i class="fa fa-trash"></i></button></td>
                         </tr>`
         })
 
@@ -215,14 +225,22 @@ if ($('#sectionSales').length) {
         calculateTotalItem()
     }
 
+    function calculateTax(valueItem, tax) {
+        return (currencyToNumber(valueItem) * currencyToNumber(tax)) / 100
+    }
+
     function calculateItem(price, quantity, tax) {
-        //return (currencyToNumber($('#price').val()) * currencyToNumber($('#quantity').val())) + currencyToNumber($('#tax').val())
-        return (currencyToNumber(price) * currencyToNumber(quantity)) + currencyToNumber(tax)
+
+        const valueItem = currencyToNumber(price) * currencyToNumber(quantity)
+        const valueTax  = calculateTax(valueItem, tax)
+        
+        return valueItem + valueTax
     }
 
     function calculateTotalItem() {
         totalTax  = 0
         totalItem = 0
+
         $('#tableItensSales').find("tbody tr").each(function () {
             
             let tax   = currencyToNumber($(this).find("td:eq(4)").html())
@@ -232,8 +250,9 @@ if ($('#sectionSales').length) {
             totalItem += value
         })
 
-        $('#totalTax').val(totalTax)
-        $('#totalSale').val(totalItem)
+        $('#totalItems').val(numberFormat(totalItem))
+        $('#totalTax').val(numberFormat(totalTax))
+        $('#totalSale').val(numberFormat(totalItem + totalTax))
     }
 
     $('#quantity, #price').on('change', function() {
@@ -260,28 +279,40 @@ if ($('#sectionSales').length) {
         calculateTotalItem()
     })
      
+    function getSaleItems() {
+        let items = [];
+
+        $('#tableItensSales').find("tbody tr").each(function () {
+            items.push({ 
+                product_id: $(this).find("td:eq(0)").html(),
+                price: currencyToNumber($(this).find("td:eq(2)").html()),
+                quantity: currencyToNumber($(this).find("td:eq(3)").html()),
+                tax: currencyToNumber($(this).find("td:eq(4)").html()),
+                price: currencyToNumber($(this).find("td:eq(5)").html())
+            })
+        })
+
+        return items
+    }
+
     $('#saveSale').on('click', () => {
 
-        const params = {
-            url: `${BASE_URL}sales/create`,
-            method: 'POST',
-            data: {
-                description: $('#description').val().trim(),
-                price: parseFloat($('#price').val()),
-                product_type_id: parseInt($('#productType option:selected').val())
-            }
-        }
-
-        if ($('#id').val().trim()) {
-            params.url  = `${BASE_URL}products/update/${$('#id').val().trim()}`
+        const data = {
+            client_name: $('#clientName option:selected').val().trim(),
+            total_price: $('#totalSale').val(),
+            total_tax: $('#totalTax').val(),
+            items: getSaleItems()
         }
 
         $.ajax({
-            url: params.url,
-            method: params.method,
-            data: params.data,
+            url: `${BASE_URL}sales/create`,
+            method: 'POST',
             dataType: 'JSON',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
             success: (data) => {
+                console.log(data)
+
                 if (data.code === 200 || data.code === 201) {
                     toastr.success('Sale created/updated!', 'Success!')
                 } else {

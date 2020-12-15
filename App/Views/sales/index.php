@@ -9,7 +9,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header bg-purple">
-                        <h5 class="modal-title">New Sale</h5>
+                        <h5 class="modal-title text-white">New Sale</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="col-4">
                                 <div class='form-group'>
-                                    <label for='productName'>Product: </label>
+                                    <label for='productName'>Product </label>
                                     <select class="form-control select2" id="productName" style="width: 100%;">
                                         <option selected value=""> <-- SELECT --> </option>  
                                         <?php foreach ($products as $product): ?>
@@ -41,25 +41,25 @@
                             </div>
                             <div class="col-2">
                                 <div class='form-group'>
-                                    <label for='quantity'>Qty: </label>
+                                    <label for='quantity' class="float-right">Qty (+) </label>
                                     <input type='text' class='form-control currency' id='quantity' placeholder="1,00" value="1,00">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class='form-group'>
-                                    <label for='price'>Price: </label>
+                                    <label for='price' class="float-right">Unit. ($) </label>
                                     <input type='text' class='form-control currency' id='price' placeholder="0,00" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class='form-group'>
-                                    <label for='tax'>Tax: </label>
+                                    <label for='tax' class="float-right">Tax (%) </label>
                                     <input type='text' class='form-control currency' id='tax' placeholder="0,00" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
-                                <div class='form-group'>
-                                    <label for='totalItem'>Total Item: </label>
+                                <div class='form-group' class="float-right">
+                                    <label for='totalItem'>Total Item (=) </label>
                                     <input type='text' class='form-control currency' id='totalItem' placeholder="0,00" readonly>
                                 </div>
                             </div>
@@ -70,15 +70,21 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-2 offset-8">
+                            <div class="col-3 offset-5">
                                 <div class='form-group'>
-                                    <label>Total Tax: </label>
-                                    <input type='text' class='form-control currency' id='totalTax' placeholder="0,00" readonly style="background: #FFDBDB">
+                                    <label class="float-right">Total Items (=) </label>
+                                    <input type='text' class='form-control currency' id='totalItems' placeholder="0,00" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class='form-group'>
-                                    <label>Total Sale: </label>
+                                    <label class="float-right">Total Tax (=) </label>
+                                    <input type='text' class='form-control currency' id='totalTax' placeholder="0,00" readonly style="background: #ECADE1">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class='form-group'>
+                                    <label class="float-right">Total Sale (=) </label>
                                     <input type='text' class='form-control currency' id='totalSale' placeholder="0,00" readonly style="background: #D6FBE4">
                                 </div>
                             </div>
@@ -89,11 +95,11 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Product</th>
-                                                <th>Price</th>
-                                                <th>Qty</th>
-                                                <th>Tax</th>
-                                                <th>Total</th>
-                                                <th>Actions</th>
+                                                <th class="text-right">Unit.</th>
+                                                <th class="text-right">Qty</th>
+                                                <th class="text-right">Tax</th>
+                                                <th class="text-right">Total</th>
+                                                <th class="text-center">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
@@ -121,8 +127,9 @@
                 <tr>
                     <th>ID</th>
                     <th>Client</th>
+                    <th>Total Items</th>
                     <th>Total Tax</th>
-                    <th>Total Price</th>
+                    <th>Total Sale</th>
                     <th>Date</th>
                     <th>Actions</th>
                 </tr>

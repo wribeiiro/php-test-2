@@ -3,22 +3,53 @@
 namespace App\Repositories;
 
 use App\Models\SaleModel;
+use App\Repositories\Interfaces\RepositoryInterface;
 
-class SalesRepository {
+class SalesRepository implements RepositoryInterface {
 
+    /**
+     * @var SaleModel
+     */
     private $model;
 
     public function __construct() {
         $this->model = new SaleModel(); 
     }
-    
+
     public function get() {
-        $sql = "SELECT * FROM sales ORDER BY id DESC";
+        $sql = "SELECT 
+                    id, client_name, total_price, total_tax, created_at, SUM(total_price + total_tax) as total_sale 
+                FROM 
+                    sales
+                GROUP BY
+                    id 
+                ORDER BY 
+                    id DESC";
         
-        return $this->model->db->query($sql)->fetchAll(\PDO::FETCH_CLASS, self::class);
+        return $this->model->executeQuery($sql);
     }
 
-    public function getItems($id) {
+    public function create(array $data) {
+        return $this->model->create($data);
+    }
+
+    public function update(int $id, array $data) {
+        return $this->model->update($id, $data);
+    }
+
+    public function delete(int $id) {
+        return $this->model->delete($id);
+    }
+
+    public function deleteItem(int $saleId) {
+        return $this->model->deleteItem($saleId);
+    }
+
+    public function createItem(array $data) {
+        return $this->model->create($data, "sales_item");
+    }
+
+    public function getItems(int $id) {
         $sql = "SELECT 
                     sales_item.*, 
                     products.description as product_name
@@ -33,36 +64,6 @@ class SalesRepository {
                 ORDER BY 
                     id DESC";
         
-        return $this->model->db->query($sql)->fetchAll(\PDO::FETCH_CLASS, self::class);
-    }
-
-    public function create(array $data) {
-
-        $fields = array_keys($data);
-        $binds  = array_pad([], count($fields), '?');
-
-        $sql = 'INSERT INTO sales ('.implode(',', $fields).') VALUES ('.implode(',', $binds).')';
-        $stm = $this->model->db->prepare($sql);
-
-        return $stm->execute(array_values($data));
-    }
-
-    public function update(int $id, array $data) {
-        
-        $setFields = implode('=?, ', array_keys($data));
-
-        $sql = "UPDATE sales SET {$setFields}=? WHERE id = {$id}";
-        $stm = $this->model->db->prepare($sql);
-
-        return $stm->execute(array_values($data));
-    }
-
-    public function delete(int $id) {
-        $query   = "DELETE FROM sales WHERE id = :id";
-        $prepare = $this->model->db->prepare($query);
-
-        $prepare->bindValue(':id', $id);
-
-        return $prepare->execute();
+        return $this->model->executeQuery($sql);
     }
 }

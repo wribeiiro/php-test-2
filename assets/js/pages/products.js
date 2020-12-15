@@ -60,7 +60,7 @@ if ($('#sectionProducts').length) {
                     render: (data, type, row, meta) => {
                         return `
                         <button type="button" class="btn btn-purple btn-sm" onclick="editModal('${data.id}', '${data.description}', '${data.price}', '${data.product_type_id}')"> <i class="fa fa-edit"></i></button>
-                        <button type="button" class="btn btn-danger btn-sm"  onclick="deleteProduct('${data.id}')"> <i class="fa fa-trash"></i></button>`
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteProduct('${data.id}')"> <i class="fa fa-trash"></i></button>`
                     }
                 }
             ]
