@@ -57,17 +57,19 @@
             <button class="btn btn-purple" type="button" id="addProduct"> <i class="fa fa-plus"></i> Add Product</button>
         </div>
 
-        <table class="table table-striped table-sm" id="tableProducts" style="width: 100%">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Product Type</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm" id="tableProducts" style="width: 100% !important">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Product Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 </div>

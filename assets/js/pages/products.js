@@ -6,7 +6,7 @@ if ($('#sectionProducts').length) {
         $('#id').val('')
         $('#description').val('')
         $('#price').val('')
-        $('#productType').prop('selectedIndex', 0)
+        $('#productType').val('').trigger("change")
         $('#modalProducts').modal({backdrop: 'static', keyboard: false})
     })
 
@@ -14,7 +14,7 @@ if ($('#sectionProducts').length) {
         tableProducts = $(`#tableProducts`).DataTable({
             sPaginationType: "full_numbers",
             destroy: true,
-            responsive: false,
+            responsive: true,
             ajax: {
                 url: `${BASE_URL}products/getAll`,
                 dataType: "JSON",
@@ -71,7 +71,7 @@ if ($('#sectionProducts').length) {
         $('#id').val(id)
         $('#description').val(description)
         $('#price').val(currencyToNumber(price))
-        $('#productType').val(type)
+        $('#productType').val(type).trigger("change")
         $('#modalProducts').modal({backdrop: 'static', keyboard: false})
     }
 

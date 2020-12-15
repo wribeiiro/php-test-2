@@ -46,16 +46,18 @@
             <button class="btn btn-purple" type="button" id="addType"> <i class="fa fa-plus"></i> Add Product Type</button>
         </div>
 
-        <table class="table table-striped table-sm" id="tableProductsType" style="width: 100%">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Description</th>
-                    <th>Tax Percentage</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm" id="tableProductsType" style="width: 100% !important">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Description</th>
+                        <th>Tax Percentage</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 </div>

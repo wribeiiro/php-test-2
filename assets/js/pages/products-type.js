@@ -13,7 +13,7 @@ if ($('#sectionProductsType').length) {
         tableProductsType = $(`#tableProductsType`).DataTable({
             sPaginationType: "full_numbers",
             destroy: true,
-            responsive: false,
+            responsive: true,
             ajax: {
                 url: `${BASE_URL}products-type/getAll`,
                 dataType: "JSON",

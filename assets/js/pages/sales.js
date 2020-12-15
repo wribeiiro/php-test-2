@@ -32,7 +32,7 @@ if ($('#sectionSales').length) {
         tableSales = $(`#tableSales`).DataTable({
             sPaginationType: "full_numbers",
             destroy: true,
-            responsive: false,
+            responsive: true,
             ajax: {
                 url: `${BASE_URL}sales/getAll`,
                 dataType: "JSON",
@@ -234,6 +234,8 @@ if ($('#sectionSales').length) {
         const valueItem = currencyToNumber(price) * currencyToNumber(quantity)
         const valueTax  = calculateTax(valueItem, tax)
         
+        console.log(valueItem + valueTax)
+
         return valueItem + valueTax
     }
 
