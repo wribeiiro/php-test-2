@@ -7,7 +7,7 @@ if (ENVIRONMENT == "development") {
 	define("DATABASE", [
 		'hostname' => '127.0.0.1',
 		'username' => 'root',
-		'password' => 'root',
+		'password' => 'Nova@123',
 		'database' => 'test_2',
 		'dbdriver' => 'mysql',
 		'port'     => 3306

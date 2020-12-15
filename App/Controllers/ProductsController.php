@@ -37,7 +37,7 @@ class ProductsController extends Controller {
     }
 
     public function createProduct() {
-        $data = $_POST;
+        $data = $this->inputPost();
 
         $response['code'] = 201;
         $response['data'] = [];
@@ -61,7 +61,7 @@ class ProductsController extends Controller {
     }
 
     public function updateProduct(int $id) {
-        $data = $_POST;
+        $data = $this->inputPost();
 
         $response['code'] = 200;
         $response['data'] = [];
@@ -94,6 +94,6 @@ class ProductsController extends Controller {
             $response['data'] = $e->getMessage();
         }
 
-        return Util::response($response);
+        return Util::response($response, $response['code']);
     }
 }

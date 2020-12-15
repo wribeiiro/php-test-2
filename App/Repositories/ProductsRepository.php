@@ -14,7 +14,8 @@ class ProductsRepository {
     
     public function get() {
         $sql = "SELECT 
-                    products.*, products_type.description as product_type_name 
+                    products.*, products_type.description as product_type_name,
+                    products_type.tax_percentage as tax 
                 FROM 
                     products 
                 INNER JOIN 
@@ -25,11 +26,11 @@ class ProductsRepository {
     }
 
     public function create(array $data) {
-        
-        $fields = array_keys($data);
-        $binds  = array_pad([],count($fields),'?');
 
-        $sql = 'INSERT INTO products ('.implode(',',$fields).') VALUES ('.implode(',',$binds).')';
+        $fields = array_keys($data);
+        $binds  = array_pad([], count($fields), '?');
+
+        $sql = 'INSERT INTO products ('.implode(',', $fields).') VALUES ('.implode(',', $binds).')';
         $stm = $this->model->db->prepare($sql);
 
         return $stm->execute(array_values($data));
@@ -37,7 +38,7 @@ class ProductsRepository {
 
     public function update(int $id, array $data) {
         
-        $setFields = implode('=?, ',array_keys($data));
+        $setFields = implode('=?, ', array_keys($data));
 
         $sql = "UPDATE products SET {$setFields}=? WHERE id = {$id}";
         $stm = $this->model->db->prepare($sql);

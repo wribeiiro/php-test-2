@@ -7,7 +7,7 @@ if ($('#sectionProducts').length) {
         $('#description').val('')
         $('#price').val('')
         $('#productType').prop('selectedIndex', 0)
-        $('#modalProducts').modal('show')
+        $('#modalProducts').modal({backdrop: 'static', keyboard: false})
     })
 
     function datatableProducts() {
@@ -72,7 +72,7 @@ if ($('#sectionProducts').length) {
         $('#description').val(description)
         $('#price').val(currencyToNumber(price))
         $('#productType').val(type)
-        $('#modalProducts').modal('show')
+        $('#modalProducts').modal({backdrop: 'static', keyboard: false})
     }
 
     function deleteProduct(id) {
@@ -129,6 +129,7 @@ if ($('#sectionProducts').length) {
             data: params.data,
             dataType: 'JSON',
             success: (data) => {
+
                 if (data.code === 200 || data.code === 201) {
                     toastr.success('Product created/updated!', 'Success!')
                 } else {
@@ -138,8 +139,11 @@ if ($('#sectionProducts').length) {
                 tableProducts.ajax.reload()
             },
             error: (e) => {
-                console.log(e)
-                toastr.error(e.responseJSON.data, 'Error!')
+                if (e.responseJSON.code === 400) {
+                    toastr.warning(e.responseJSON.data, 'Warning!')
+                } else {
+                    toastr.error(e.responseJSON.data, 'Error!')
+                }
             }
         })
 

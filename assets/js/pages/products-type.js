@@ -6,7 +6,7 @@ if ($('#sectionProductsType').length) {
         $('#id').val('')
         $('#description').val('')
         $('#taxPercentage').val('')
-        $('#modalProductsType').modal('show')
+        $('#modalProductsType').modal({backdrop: 'static', keyboard: false})
     })
 
     function datatableProductsType() {
@@ -66,7 +66,7 @@ if ($('#sectionProductsType').length) {
         $('#id').val(id)
         $('#description').val(description)
         $('#taxPercentage').val(currencyToNumber(taxPercentage))
-        $('#modalProductsType').modal('show')
+        $('#modalProductsType').modal({backdrop: 'static', keyboard: false})
     }
 
     function deleteType(id) {
@@ -126,8 +126,11 @@ if ($('#sectionProductsType').length) {
                 tableProductsType.ajax.reload()
             },
             error: (e) => {
-                console.log(e)
-                toastr.error(e.responseJSON.data, 'Error!')
+                if (e.responseJSON.code === 400) {
+                    toastr.warning(e.responseJSON.data, 'Warning!')
+                } else {
+                    toastr.error(e.responseJSON.data, 'Error!')
+                }
             }
         })
 

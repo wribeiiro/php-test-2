@@ -25,3 +25,7 @@ body {
     border-radius: 4px;
     border-top: solid 4px #7159C1;
 }
+
+.form-control {
+    height: 28px !important;
+}

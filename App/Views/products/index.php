@@ -26,13 +26,13 @@
                             <div class="col-4">
                                 <div class='form-group'>
                                     <label for='price'>Price: </label>
-                                    <input type='text' class='form-control currency' id='price' value="0">
+                                    <input type='text' class='form-control currency' id='price' value="0" placeholder="0,00">
                                 </div>
                             </div>
                             <div class="col-8">
                                 <div class='form-group'>
                                     <label for='productType'>Product Type: </label>
-                                    <select class="form-control" id="productType">
+                                    <select class="form-control" id="productType" style="width: 100%;">
                                         <option selected value=""><-- SELECT --></option>
 
                                         <?php foreach ($productsType as $type): ?>

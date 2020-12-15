@@ -18,17 +18,21 @@ class SalesService extends Controller {
         $this->sales_repository = new SalesRepository();
     }
 
-    public function getSales() {
+    public function getAll() {
         return $this->sales_repository->get();
     }
 
-    public function getSale(int $id) {
+    public function getItems(int $id) {
+        return $this->sales_repository->getItems($id);
+    }
+
+    public function getById(int $id) {
         return $this->sales_repository->get($id);
     }
 
     public function create(array $data) {
 
-        $this->validate = (new SalesValidation)->makeValidation($data);
+        $this->validate = (new SalesValidation())->makeValidation($data);
 
         if ($this->validate !== null) {
             return $this->validate;
@@ -40,28 +44,28 @@ class SalesService extends Controller {
     }
 
     public function update(array $data, int $id) {
-        $this->validate = (new SalesValidation)->makeValidation($data);
+        $this->validate = (new SalesValidation())->makeValidation($data);
 
         if ($this->validate !== null) {
             return $this->validate;
         }
 
         try {
-            $sale = $this->sales_repository->update($id, $data);
+            $product = $this->sales_repository->update($id, $data);
         } catch (\Exception $e) {
-            $sale = $e->getMessage();
+            $product = $e->getMessage();
         }
 
-        return $sale;
+        return $product;
     }
 
     public function delete(int $id) {
         try {
-            $sale = $this->sales_repository->delete($id);
+            $product = $this->sales_repository->delete($id);
         } catch (\Exception $e) {
-            $sale = $e->getMessage();
+            $product = $e->getMessage();
         }
 
-        return $sale;
+        return $product;
     }
 }

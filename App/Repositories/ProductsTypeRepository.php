@@ -21,9 +21,9 @@ class ProductsTypeRepository {
     public function create(array $data) {
         
         $fields = array_keys($data);
-        $binds  = array_pad([],count($fields),'?');
+        $binds  = array_pad([], count($fields),'?');
 
-        $sql = 'INSERT INTO products_type ('.implode(',',$fields).') VALUES ('.implode(',',$binds).')';
+        $sql = 'INSERT INTO products_type ('.implode(',', $fields).') VALUES ('.implode(',', $binds).')';
         $stm = $this->model->db->prepare($sql);
 
         return $stm->execute(array_values($data));
@@ -31,7 +31,7 @@ class ProductsTypeRepository {
 
     public function update(int $id, array $data) {
         
-        $setFields = implode('=?, ',array_keys($data));
+        $setFields = implode('=?, ', array_keys($data));
 
         $sql = "UPDATE products_type SET {$setFields}=? WHERE id = {$id}";
         $stm = $this->model->db->prepare($sql);

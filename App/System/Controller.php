@@ -6,7 +6,7 @@ class Controller {
 
     public function inputGet($name = null, int $filter = FILTER_DEFAULT) {
         
-        if (is_array($name)) {
+        if (is_null($name)) {
             return filter_var_array($_GET, $filter);
         }
 
@@ -15,7 +15,7 @@ class Controller {
 
     public function inputPost($name = null, int $filter = FILTER_DEFAULT) {
         
-        if (is_array($name)) {
+        if (is_null($name)) {
             return filter_var_array($_POST, $filter);
         }
 

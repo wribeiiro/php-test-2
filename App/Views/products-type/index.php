@@ -27,7 +27,7 @@
                             <div class="col-4">
                                 <div class='form-group'>
                                 <label for='taxPercentage'>Tax Percentage: </label>
-                                <input type='text' class='form-control currency' id='taxPercentage'>
+                                <input type='text' class='form-control currency' id='taxPercentage' placeholder="0,00">
                             </div>
                             </div>
                         </div>

@@ -10,6 +10,7 @@ SimpleRouter::get('/products',             'ProductsController@index');
 SimpleRouter::get('/products-type',             'ProductsTypeController@index');
 
 SimpleRouter::get('/sales/getAll', 'SalesController@getSales');
+SimpleRouter::get('/sales/getItems/{id}', 'SalesController@getItems');
 SimpleRouter::post('/sales/create', 'SalesController@createSale');
 SimpleRouter::post('/sales/update/{id}', 'SalesController@updateSale');
 SimpleRouter::delete('/sales/delete/{id}', 'SalesController@deleteSale');

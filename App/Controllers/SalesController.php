@@ -3,43 +3,110 @@
 namespace App\Controllers;
 
 use App\System\Controller;
-use App\Models\SaleModel;
+use App\Services\SalesService;
 use App\Helpers\Util;
+use App\Repositories\ProductsRepository;
 
 class SalesController extends Controller {
 
-    private $model;
+    private $sales_services;
 
     public function __construct() {
-        $this->model = new SaleModel(); 
+        $this->sales_services = new SalesService(); 
+        $this->data['products'] = (new ProductsRepository())->get();
     }
 
     public function index() {
-        $body["teste"] = '0ok';
-
-        Util::view('layout/header', $body);
-        Util::view('layout/menu', $body);
-        Util::view('sales/index', $body);
-        Util::view('layout/footer', $body);
+        Util::view('layout/header');
+        Util::view('layout/menu',);
+        Util::view('sales/index', $this->data);
+        Util::view('layout/footer');
     }
     
     public function getSales() {
 
+        try {
+            $response['code'] = 200;
+            $response['data'] = $this->sales_services->getAll();
+        } catch (\Exception $e) {
+            $response['code'] = 500;
+            $response['data'] = $e->getMessage();
+        }
+
+        return Util::response($response, $response['code']);
     }
 
-    public function getSale(int $id) {
-        
+    public function getItems(int $id) {
+
+        try {
+            $response['code'] = 200;
+            $response['data'] = $this->sales_services->getItems($id);
+        } catch (\Exception $e) {
+            $response['code'] = 500;
+            $response['data'] = $e->getMessage();
+        }
+
+        return Util::response($response, $response['code']);
     }
 
-    public function create() {
+    public function createProduct() {
+        $data = $this->inputPost();
 
+        $response['code'] = 201;
+        $response['data'] = [];
+
+        try {
+            $result = $this->sales_services->create($data);
+
+            if (isset($result['code']) && !empty($result['code'])) {
+                $response['code'] = $result['code'];
+                $response['data'] = $result['data'];
+            } else {
+                $response['data'] = $result;
+            }
+
+        } catch (\Exception $e) {
+            $response['code'] = 500;
+            $response['data'] = $e->getMessage();
+        }
+
+        return Util::response($response, $response['code']);
     }
 
-    public function update(int $id) {
+    public function updateProduct(int $id) {
+        $data = $this->inputPost();
 
+        $response['code'] = 200;
+        $response['data'] = [];
+
+        try {
+            $result = $this->sales_services->update($data, $id);
+
+            if (isset($result['code']) && !empty($result['code'])) {
+                $response['code'] = $result['code'];
+                $response['data'] = $result['data'];
+            } else {
+                $response['data'] = $result;
+            }
+
+        } catch (\Exception $e) {
+            $response['code'] = 500;
+            $response['data'] = $e->getMessage();
+        }
+
+        return Util::response($response, $response['code']);
     }
 
-    public function delete(int $id) {
+    public function deleteProduct(int $id) {
 
+        try {
+            $response['code'] = 200;
+            $response['data'] = $this->sales_services->delete($id);
+        } catch (\Exception $e) {
+            $response['code'] = 500;
+            $response['data'] = $e->getMessage();
+        }
+
+        return Util::response($response, $response['code']);
     }
 }

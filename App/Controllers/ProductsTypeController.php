@@ -35,7 +35,7 @@ class ProductsTypeController extends Controller {
     }
 
     public function createProductType() {
-        $data = $_POST;
+        $data = $this->inputPost();
 
         $response['code'] = 201;
         $response['data'] = [];
@@ -59,7 +59,7 @@ class ProductsTypeController extends Controller {
     }
 
     public function updateProductType(int $id) {
-        $data = $_POST;
+        $data = $this->inputPost();
 
         $response['code'] = 200;
         $response['data'] = [];

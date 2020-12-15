@@ -23,7 +23,7 @@ function dateToYearMonthDay(strDate) {
 }
 
 function numberFormat(number = 0, decimals = 2) {
-	return Number(number).toFixed(decimals)
+	return Number(number).toFixed(decimals).replace('.', ',')
 }
 
 function currencyToNumber(value) {
@@ -39,14 +39,18 @@ function currencyToNumber(value) {
 	return isNaN(value) == false ? parseFloat(value) : parseFloat(value.replace(".", "").replace(",", "."))
 }
 
-$('.currency').inputmask('currency', {
-	autoUnmask: true,
-	radixPoint: ",",
-	groupSeparator: ".",
-	allowMinus: false,
-	prefix: '',
-	digits: 2,
-	digitsOptional: false,
-	rightAlign: true,
-	unmaskAsNumber: true
+$(document).ready(function() {
+	$('.currency').inputmask('currency', {
+		autoUnmask: true,
+		radixPoint: ",",
+		groupSeparator: ".",
+		allowMinus: false,
+		prefix: '',
+		digits: 2,
+		digitsOptional: false,
+		rightAlign: true,
+		unmaskAsNumber: true
+	})
+
+	$("select").select2()
 })

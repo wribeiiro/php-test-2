@@ -12,40 +12,53 @@ class SalesRepository {
         $this->model = new SaleModel(); 
     }
     
-    public function get(int $id = 0) {
-        $query = "SELECT * FROM {this->table}";
+    public function get() {
+        $sql = "SELECT * FROM sales ORDER BY id DESC";
         
-        if ($id > 0) {
-            $query .= " WHERE id = {$id} LIMIT 1";
+        return $this->model->db->query($sql)->fetchAll(\PDO::FETCH_CLASS, self::class);
+    }
 
-            return $this->model->db->query($query)->fetch();
-        }
-
-        return $this->model->db->query($query)->fetchAll();
+    public function getItems($id) {
+        $sql = "SELECT 
+                    sales_item.*, 
+                    products.description as product_name
+                FROM 
+                    sales_item 
+                INNER JOIN
+                    products ON sales_item.product_id = products.id
+                INNER JOIN
+                    products_type ON products.product_type_id = products_type.id
+                WHERE 
+                    sale_id = {$id} 
+                ORDER BY 
+                    id DESC";
+        
+        return $this->model->db->query($sql)->fetchAll(\PDO::FETCH_CLASS, self::class);
     }
 
     public function create(array $data) {
 
-        $query   = "INSERT INTO {$this->table} (campo) VALUES (value) ";
-        $prepare = $this->model->db->prepare($query);
+        $fields = array_keys($data);
+        $binds  = array_pad([], count($fields), '?');
 
-        $prepare->bindValue(':nome', $data['nome']);
+        $sql = 'INSERT INTO sales ('.implode(',', $fields).') VALUES ('.implode(',', $binds).')';
+        $stm = $this->model->db->prepare($sql);
 
-        return $prepare->execute();
+        return $stm->execute(array_values($data));
     }
 
     public function update(int $id, array $data) {
-
-        $query   = "UPDATE {$this->table} SET WHERE  id=:id ";
-        $prepare = $this->model->db->prepare($query);
-
-        $prepare->bindValue(':id', $id);
         
-        return $prepare->execute();
+        $setFields = implode('=?, ', array_keys($data));
+
+        $sql = "UPDATE sales SET {$setFields}=? WHERE id = {$id}";
+        $stm = $this->model->db->prepare($sql);
+
+        return $stm->execute(array_values($data));
     }
 
     public function delete(int $id) {
-        $query   = "DELETE FROM {$this->table} WHERE id = :id";
+        $query   = "DELETE FROM sales WHERE id = :id";
         $prepare = $this->model->db->prepare($query);
 
         $prepare->bindValue(':id', $id);
