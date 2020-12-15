@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../assets/css/app.css">
+    <link rel="stylesheet" href="<?=BASE_URL?>assets/css/app.css">
+
+    <link rel="shortcut icon" href="https://images.emojiterra.com/twitter/v13.0/512px/1f418.png" type="image/x-icon">
 
     <script>
         const BASE_URL = "<?=BASE_URL?>";

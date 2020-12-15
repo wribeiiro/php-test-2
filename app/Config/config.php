@@ -1,11 +1,11 @@
 <?php
 
 define("APP_ENVIRONMENT", "development");
-define("DB_ENVIRONMENT", "mysql");
+define("DB_ENVIRONMENT", "postgres");
 
 $dbMysql['hostname']    = "127.0.0.1";
 $dbMysql['username']    = "root";
-$dbMysql['password']    = "root";
+$dbMysql['password']    = "Nova@123";
 $dbMysql['database']    = "test_2";
 $dbMysql['dbdriver']    = "mysql";
 $dbMysql['port']        = 3306;

@@ -44,7 +44,7 @@ class ComposerStaticInit742803d27e68fc139af6df4fff5d92de
     public static $prefixDirsPsr4 = array (
         'vendor\\' => 
         array (
-            0 => 'C:\\xampp\\htdocs\\php-test-2\\vendor',
+            0 => __DIR__ . '/../..' . '/vendor',
         ),
         'Psr\\Container\\' => 
         array (
@@ -98,7 +98,6 @@ class ComposerStaticInit742803d27e68fc139af6df4fff5d92de
         'App\\Validations\\ProductsValidation' => __DIR__ . '/../..' . '/app/Validations/ProductsValidation.php',
         'App\\Validations\\SalesItemValidation' => __DIR__ . '/../..' . '/app/Validations/SalesItemValidation.php',
         'App\\Validations\\SalesValidation' => __DIR__ . '/../..' . '/app/Validations/SalesValidation.php',
-        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DI\\Annotation\\Inject' => __DIR__ . '/..' . '/php-di/php-di/src/Annotation/Inject.php',
         'DI\\Annotation\\Injectable' => __DIR__ . '/..' . '/php-di/php-di/src/Annotation/Injectable.php',
         'DI\\CompiledContainer' => __DIR__ . '/..' . '/php-di/php-di/src/CompiledContainer.php',

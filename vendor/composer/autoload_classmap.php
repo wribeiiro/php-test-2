@@ -27,7 +27,6 @@ return array(
     'App\\Validations\\ProductsValidation' => $baseDir . '/app/Validations/ProductsValidation.php',
     'App\\Validations\\SalesItemValidation' => $baseDir . '/app/Validations/SalesItemValidation.php',
     'App\\Validations\\SalesValidation' => $baseDir . '/app/Validations/SalesValidation.php',
-    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'DI\\Annotation\\Inject' => $vendorDir . '/php-di/php-di/src/Annotation/Inject.php',
     'DI\\Annotation\\Injectable' => $vendorDir . '/php-di/php-di/src/Annotation/Injectable.php',
     'DI\\CompiledContainer' => $vendorDir . '/php-di/php-di/src/CompiledContainer.php',

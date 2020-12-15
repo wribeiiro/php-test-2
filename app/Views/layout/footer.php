@@ -8,9 +8,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.5/jquery.inputmask.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
-<script src="../assets/js/app.js"></script>
-<script src="../assets/js/pages/products.js"></script>
-<script src="../assets/js/pages/products-type.js"></script>
-<script src="../assets/js/pages/sales.js"></script>
+<script src="<?=BASE_URL?>assets/js/app.js"></script>
+<script src="<?=BASE_URL?>assets/js/pages/products.js"></script>
+<script src="<?=BASE_URL?>assets/js/pages/products-type.js"></script>
+<script src="<?=BASE_URL?>assets/js/pages/sales.js"></script>
 </body>
 </html>
