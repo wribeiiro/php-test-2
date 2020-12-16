@@ -1,7 +1,7 @@
 <?php
 
 define("APP_ENVIRONMENT", "development");
-define("DB_ENVIRONMENT", "mysql");
+define("DB_ENVIRONMENT", "postgres");
 
 $dbMysql['hostname']    = "127.0.0.1";
 $dbMysql['username']    = "root";

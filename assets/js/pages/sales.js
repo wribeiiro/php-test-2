@@ -6,8 +6,8 @@ if ($('#sectionSales').length) {
     
     $('#addSale').click(() => {
         $('#id').val('')
-        $('#clientName').val("").trigger("change")
-        $('#productName').val("").trigger("change")
+        $('#clientName').val("").trigger("change").attr('selected')
+        $('#productName').val("").trigger("change").attr('selected')
         $('#quantity').val('1,00')
         $('#price').val('0,00')
         $('#tax').val('0,00')
@@ -15,6 +15,7 @@ if ($('#sectionSales').length) {
         $('#tableItensSales tbody').empty()
         $('#totalTax').val('0,00')
         $('#totalSale').val('0,00')
+        $('#totalItems').val('0,00')
 
         $('#saveSale').removeAttr('disabled')
         $('#addItem').removeAttr('disabled')
@@ -61,7 +62,7 @@ if ($('#sectionSales').length) {
                     class: "text-left",
                 },
                 {
-                    data: "total_price",
+                    data: "total_items",
                     class: "text-right",
                     render: function(data) {
                         return numberFormat(data)
@@ -75,7 +76,7 @@ if ($('#sectionSales').length) {
                     }
                 },
                 {
-                    data: "total_sale",
+                    data: "total_price",
                     class: "text-right",
                     render: function(data) {
                         return numberFormat(data)
@@ -216,7 +217,7 @@ if ($('#sectionSales').length) {
                             <td class="text-right">${numberFormat(el.price)}</td>
                             <td class="text-right">${numberFormat(el.quantity)}</td>
                             <td class="text-right">${numberFormat(el.tax)}</td>
-                            <td class="text-right">${numberFormat(calculateItem(el.price, el.quantity, el.tax))}</td>
+                            <td class="text-right">${numberFormat(currencyToNumber((el.price * el.quantity) + currencyToNumber(el.tax)))}</td>
                             <td class="text-center"><button type="button" class="btn btn-danger btn-sm" disabled> <i class="fa fa-trash"></i></button></td>
                         </tr>`
         })
@@ -230,11 +231,9 @@ if ($('#sectionSales').length) {
     }
 
     function calculateItem(price, quantity, tax) {
-
+        
         const valueItem = currencyToNumber(price) * currencyToNumber(quantity)
         const valueTax  = calculateTax(valueItem, tax)
-        
-        console.log(valueItem + valueTax)
 
         return valueItem + valueTax
     }
@@ -248,7 +247,7 @@ if ($('#sectionSales').length) {
             let tax   = currencyToNumber($(this).find("td:eq(4)").html())
             totalTax += tax
 
-            let value = currencyToNumber($(this).find("td:eq(5)").html())
+            let value = (currencyToNumber($(this).find("td:eq(2)").html()) * currencyToNumber($(this).find("td:eq(3)").html()))
             totalItem += value
         })
 
@@ -258,7 +257,7 @@ if ($('#sectionSales').length) {
     }
 
     $('#quantity, #price').on('change', function() {
-        $("#totalItem").val(currencyToNumber(calculateItem($('#price').val(), $('#quantity').val(), $('#tax').val())))
+        $("#totalItem").val(numberFormat(calculateItem($('#price').val(), $('#quantity').val(), $('#tax').val())))
     })
 
     $('#productName').on('change', function() {
@@ -289,8 +288,7 @@ if ($('#sectionSales').length) {
                 product_id: $(this).find("td:eq(0)").html(),
                 price: currencyToNumber($(this).find("td:eq(2)").html()),
                 quantity: currencyToNumber($(this).find("td:eq(3)").html()),
-                tax: currencyToNumber($(this).find("td:eq(4)").html()),
-                price: currencyToNumber($(this).find("td:eq(5)").html())
+                tax: currencyToNumber($(this).find("td:eq(4)").html())
             })
         })
 
@@ -298,6 +296,11 @@ if ($('#sectionSales').length) {
     }
 
     $('#saveSale').on('click', () => {
+
+        if (!$('#tableItensSales tbody').find('tr').length) {
+            toastr.warning('Please add a item', 'Warning')
+            return
+        }
 
         const data = {
             client_name: $('#clientName option:selected').val().trim(),
@@ -331,5 +334,4 @@ if ($('#sectionSales').length) {
 
         $('#modalSales').modal('hide')
     })
-    
 }

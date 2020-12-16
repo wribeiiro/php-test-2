@@ -18,11 +18,9 @@ class SalesRepository implements RepositoryInterface {
 
     public function get() {
         $sql = "SELECT 
-                    id, client_name, total_price, total_tax, created_at, SUM(total_price + total_tax) as total_sale 
+                    id, client_name, (total_price - total_tax) as total_items, total_tax, created_at, total_price 
                 FROM 
                     sales
-                GROUP BY
-                    id 
                 ORDER BY 
                     id DESC";
         
