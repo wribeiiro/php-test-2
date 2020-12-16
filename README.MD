@@ -40,7 +40,9 @@ $ define("BASE_URL", "http://localhost:8000/");
 ```
 
 After changing the above parameters,
-Import the .sql file into the desired database (postgres or mysql)
+
+- Import the test_2_postgres.sql / test_2_postgres.backup into postgres database 
+- Import test_2_mysql.sql file into mysql database
 
 Start the local development server
 ```bash
