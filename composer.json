@@ -1,6 +1,6 @@
 {
-	"name": "wribeiiro/php-test-2",
-	"description": "",
+    "name": "wribeiiro/php-test-2",
+    "description": "",
     "authors": [
         {
             "name": "Wellisson Ribeiro",
@@ -8,7 +8,7 @@
         }
     ],
     "require": {
-        "php" : ">=7.4",
+        "php": "^7.3",
 		"pecee/simple-router": "4.2.0.6"
     },
     "autoload": {

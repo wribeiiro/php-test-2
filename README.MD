@@ -1,7 +1,7 @@
 # PHPTest-2 🐘
 Small registration developed for testing.
 
-You can check the project running [click me :D](https://wribeiiro.com/php-test-2)
+You can check the project running with mysql database [click me :D](https://wribeiiro.com/php-test-2)
 
 ### Functionalities
 
@@ -38,6 +38,10 @@ $ define("APP_ENVIRONMENT", "development");
 $ define("DB_ENVIRONMENT", "mysql");
 $ define("BASE_URL", "http://localhost:8000/");
 ```
+
+After changing the above parameters,
+Import the .sql file into the desired database (postgres or mysql)
+
 Start the local development server
 ```bash
 $ php -S localhost:8000
