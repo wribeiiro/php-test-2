@@ -1,22 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repositories;
 
 use App\Models\SaleModel;
 use App\Repositories\Interfaces\RepositoryInterface;
 
-class SalesRepository implements RepositoryInterface {
+class SalesRepository implements RepositoryInterface
+{
 
     /**
      * @var SaleModel
      */
     private $model;
 
-    public function __construct() {
-        $this->model = new SaleModel(); 
+    public function __construct()
+    {
+        $this->model = new SaleModel();
     }
 
-    public function get() {
+    public function get()
+    {
         $sql = "SELECT 
                     id, client_name, (total_price - total_tax) as total_items, total_tax, created_at, total_price 
                 FROM 
@@ -27,27 +32,33 @@ class SalesRepository implements RepositoryInterface {
         return $this->model->executeQuery($sql);
     }
 
-    public function create(array $data) {
+    public function create(array $data)
+    {
         return $this->model->create($data);
     }
 
-    public function update(int $id, array $data) {
+    public function update(int $id, array $data)
+    {
         return $this->model->update($id, $data);
     }
 
-    public function delete(int $id) {
+    public function delete(int $id)
+    {
         return $this->model->delete($id);
     }
 
-    public function deleteItem(int $saleId) {
+    public function deleteItem(int $saleId)
+    {
         return $this->model->deleteItem($saleId);
     }
 
-    public function createItem(array $data) {
+    public function createItem(array $data)
+    {
         return $this->model->create($data, "sales_item");
     }
 
-    public function getItems(int $id) {
+    public function getItems(int $id)
+    {
         $sql = "SELECT 
                     sales_item.*, 
                     products.description as product_name

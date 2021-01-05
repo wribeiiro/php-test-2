@@ -1,8 +1,11 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace App\Helpers;
 
-class View {
+final class View
+{
 
     /**
      * Includes a view
@@ -11,11 +14,11 @@ class View {
      * @param array $options
      * @return string|null
      */
-    public static function include(string $viewName, array $data = []) {
-
+    public static function include(string $viewName, array $data = [])
+    {
         extract($data);
 
-        $file = dirname(__FILE__, 2)."/Views/{$viewName}.php";
+        $file = \dirname(__FILE__, 2)."/Views/{$viewName}.php";
 
         if (!file_exists($file)) {
             die("View {$file} file not exists");

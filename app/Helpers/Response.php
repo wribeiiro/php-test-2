@@ -1,8 +1,11 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace App\Helpers;
 
-class Response {
+final class Response
+{
     
     // Success
     const HTTP_OK                    = 200;
@@ -22,10 +25,11 @@ class Response {
      * @param array $array
      * @return void
      */
-    public static function respond(array $array, int $code = self::HTTP_OK): void {
+    public static function respond(array $array, int $code = self::HTTP_OK): void
+    {
         http_response_code($code);
-		header("Content-Type: application/json");
-		echo json_encode($array);
-		exit;
+        header("Content-Type: application/json");
+        echo json_encode($array);
+        exit;
     }
 }

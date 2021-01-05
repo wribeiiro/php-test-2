@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\System\Database;
 
-class SaleModel extends Database {
-
+class SaleModel extends Database
+{
     public function __construct()
     {
         parent::__construct();

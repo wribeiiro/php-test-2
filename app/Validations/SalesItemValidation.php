@@ -1,14 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Validations;
 
-use App\Helpers\Response;
+class SalesItemValidation
+{
+    private $validations;
 
-class SalesItemValidation {
-
-    private $validations = null;
-
-    public function makeValidation(array $data):? array {
+    public function makeValidation(): ?array
+    {
         return $this->validations;
     }
 }

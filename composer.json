@@ -13,7 +13,10 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9",
-        "fakerphp/faker": "^1.9.1"
+        "fakerphp/faker": "^1.9.1",
+        "nunomaduro/phpinsights": "^1.14",
+        "friendsofphp/php-cs-fixer": "^2.17",
+        "phpstan/phpstan": "^0.12.64"
     },
     "autoload-dev": {
         "psr-4": {

@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Validations;
 
 use App\Helpers\Response;
-class SalesValidation {
 
-    private $validations = null;
+class SalesValidation
+{
+    private $validations;
 
-    public function makeValidation(array $data):? array {
-        
+    public function makeValidation(array $data): ?array
+    {
         if (isset($data) && !empty($data)) {
-
             if (!isset($data['client_name']) || empty($data['client_name'])) {
                 $this->validations[] = "Client Name is required. ";
             }
@@ -44,6 +46,5 @@ class SalesValidation {
         }
 
         return $this->validations;
-
     }
 }

@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Validations;
+
 use App\Helpers\Response;
-class ProductsValidation {
 
-    private $validations = null;
+class ProductsValidation
+{
+    private $validations;
 
-    public function makeValidation(array $data):? array {
-
+    public function makeValidation(array $data): ?array
+    {
         if (isset($data) && !empty($data)) {
-            
             if (!isset($data['description']) || empty($data['description'])) {
                 $this->validations[] = "Description is required. ";
             }

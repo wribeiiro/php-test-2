@@ -1,18 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Test;
 
 use PHPUnit\Framework\TestCase;
 use App\Models\ProductModel;
 
-class ProductTest extends TestCase {
+final class ProductTest extends TestCase
+{
 
     /**
      * @var ProductModel
      */
     private $product;
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         $this->product = new ProductModel();
 
         $this->product->setDescription('Product Test');
@@ -23,28 +27,32 @@ class ProductTest extends TestCase {
     /**
      * @covers App\Models\ProductModel
      */
-    public function testFullDescription() {
-        $this->assertCount(2, explode(' ' ,$this->product->getDescription()));
+    public function testFullDescription()
+    {
+        $this->assertCount(2, explode(' ', $this->product->getDescription()));
     }
 
     /**
      * @covers App\Models\ProductModel
      */
-    public function testPriceIsFloat() {
+    public function testPriceIsFloat()
+    {
         $this->assertIsFloat($this->product->getPrice());
     }
 
     /**
      * @covers App\Models\ProductModel
      */
-    public function testPriceIsGreatThanZero() {
+    public function testPriceIsGreatThanZero()
+    {
         $this->assertGreaterThan(0, $this->product->getPrice());
     }
 
     /**
      * @covers App\Models\ProductModel
      */
-    public function testPriceLengthIsLessThanNine() {
+    public function testPriceLengthIsLessThanNine()
+    {
         $this->assertLessThanOrEqual(9, strlen($this->product->getPrice()));
     }
 }

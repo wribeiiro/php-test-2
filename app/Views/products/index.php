@@ -36,7 +36,7 @@
                                         <option selected value=""><-- SELECT --></option>
 
                                         <?php foreach ($productsType as $type): ?>
-                                        <option value="<?=$type->id?>"><?=strtoupper($type->description)?></option>
+                                        <option value="<?=$type->id?>"><?=\mb_strtoupper($type->description)?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>

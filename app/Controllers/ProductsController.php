@@ -1,100 +1,104 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers;
 
-use App\System\Controller;
 use App\Helpers\View;
 use App\Helpers\Response;
+use App\System\Controller;
 use App\Services\ProductsService;
 use App\Repositories\ProductsTypeRepository;
 
-class ProductsController extends Controller {
-
+class ProductsController extends Controller
+{
     protected $products_service;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->products_service = new ProductsService();
         $this->data['productsType'] = (new ProductsTypeRepository())->get();
     }
 
-    public function index() {
+    public function index(): void
+    {
         View::include('layout/header');
         View::include('layout/menu');
         View::include('products/index', $this->data);
         View::include('layout/footer');
     }
 
-    public function getProducts() {
-
+    public function getProducts()
+    {
         try {
-            $response['code'] = Response::HTTP_OK;
-            $response['data'] = $this->products_service->getAll();
+            $this->response['code'] = Response::HTTP_OK;
+            $this->response['data'] = $this->products_service->getAll();
         } catch (\Exception $e) {
-            $response['code'] = Response::HTTP_INTERNAL_SERVER_ERROR;
-            $response['data'] = $e->getMessage();
+            $this->response['code'] = Response::HTTP_INTERNAL_SERVER_ERROR;
+            $this->response['data'] = $e->getMessage();
         }
 
-        return Response::respond($response, $response['code']);
+        return Response::respond($this->response, $this->response['code']);
     }
 
-    public function createProduct() {
+    public function createProduct()
+    {
         $data = $this->inputPost();
 
-        $response['code'] = Response::HTTP_CREATED;
-        $response['data'] = [];
+        $this->response['code'] = Response::HTTP_CREATED;
+        $this->response['data'] = [];
 
         try {
             $result = $this->products_service->create($data);
 
             if (isset($result['code']) && !empty($result['code'])) {
-                $response['code'] = $result['code'];
-                $response['data'] = $result['data'];
+                $this->response['code'] = $result['code'];
+                $this->response['data'] = $result['data'];
             } else {
-                $response['data'] = $result;
+                $this->response['data'] = $result;
             }
-
         } catch (\Exception $e) {
-            $response['code'] = Response::HTTP_INTERNAL_SERVER_ERROR;
-            $response['data'] = $e->getMessage();
+            $this->response['code'] = Response::HTTP_INTERNAL_SERVER_ERROR;
+            $this->response['data'] = $e->getMessage();
         }
 
-        return Response::respond($response, $response['code']);
+        return Response::respond($this->response, $this->response['code']);
     }
 
-    public function updateProduct(int $id) {
+    public function updateProduct(int $id)
+    {
         $data = $this->inputPost();
 
-        $response['code'] = Response::HTTP_OK;
-        $response['data'] = [];
+        $this->response['code'] = Response::HTTP_OK;
+        $this->response['data'] = [];
 
         try {
             $result = $this->products_service->update($data, $id);
 
             if (isset($result['code']) && !empty($result['code'])) {
-                $response['code'] = $result['code'];
-                $response['data'] = $result['data'];
+                $this->response['code'] = $result['code'];
+                $this->response['data'] = $result['data'];
             } else {
-                $response['data'] = $result;
+                $this->response['data'] = $result;
             }
-
         } catch (\Exception $e) {
-            $response['code'] = Response::HTTP_INTERNAL_SERVER_ERROR;
-            $response['data'] = $e->getMessage();
+            $this->response['code'] = Response::HTTP_INTERNAL_SERVER_ERROR;
+            $this->response['data'] = $e->getMessage();
         }
 
-        return Response::respond($response, $response['code']);
+        return Response::respond($this->response, $this->response['code']);
     }
 
-    public function deleteProduct(int $id) {
-
+    public function deleteProduct(int $id)
+    {
         try {
-            $response['code'] = Response::HTTP_OK;
-            $response['data'] = $this->products_service->delete($id);
+            $this->response['code'] = Response::HTTP_OK;
+            $this->response['data'] = $this->products_service->delete($id);
         } catch (\Exception $e) {
-            $response['code'] = Response::HTTP_INTERNAL_SERVER_ERROR;
-            $response['data'] = $e->getMessage();
+            $this->response['code'] = Response::HTTP_INTERNAL_SERVER_ERROR;
+            $this->response['data'] = $e->getMessage();
         }
 
-        return Response::respond($response, $response['code']);
+        return Response::respond($this->response, $this->response['code']);
     }
 }

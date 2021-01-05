@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 define("APP_ENVIRONMENT", "development");
 define("DB_ENVIRONMENT", "mysql");
 
@@ -18,13 +20,13 @@ $dbPostgres['dbdriver'] = "pgsql";
 $dbPostgres['port']     = 5432;
 
 if (APP_ENVIRONMENT === "development") {
-	define("BASE_URL", "http://localhost:8000/");
+    define("BASE_URL", "http://localhost:8000/");
 } else {
-	define("BASE_URL", "https://wribeiiro.com/php-test-2/");
+    define("BASE_URL", "https://wribeiiro.com/php-test-2/");
 }
 
 if (DB_ENVIRONMENT === "mysql") {
-	define("DATABASE", $dbMysql);
+    define("DATABASE", $dbMysql);
 } else {
-	define("DATABASE", $dbPostgres);
+    define("DATABASE", $dbPostgres);
 }

@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System;
 
-class Database {
+class Database
+{
 
     /**
      * @var \PDO
@@ -14,7 +17,8 @@ class Database {
      */
     protected $table;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->setConnection();
     }
 
@@ -23,14 +27,14 @@ class Database {
      *
      * @return void
      */
-    private function setConnection() {
-
+    private function setConnection(): void
+    {
         try {
             $this->conn = new \PDO(DATABASE['dbdriver'] . ":host=" . DATABASE['hostname'] . ";port=" . DATABASE['port']  . ";dbname=" . DATABASE['database'], DATABASE['username'], DATABASE['password']);
 
             $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        } catch (\PDOException $e) {
-            die($e->getCode() .  " - " .$e->getMessage());
+        } catch (\PDOException $except) {
+            die($except->getCode() .  " - " .$except->getMessage());
         }
     }
 
@@ -40,7 +44,8 @@ class Database {
      * @param string $sql
      * @return array
      */
-    public function executeQuery(string $sql): array {
+    public function executeQuery(string $sql): array
+    {
         return $this->conn->query($sql)->fetchAll(\PDO::FETCH_CLASS, self::class);
     }
 
@@ -49,7 +54,8 @@ class Database {
      *
      * @return array
      */
-    public function get(): array {
+    public function get(): array
+    {
         $sql = "SELECT * FROM {$this->table} ORDER BY id DESC";
 
         return $this->conn->query($sql)->fetchAll(\PDO::FETCH_CLASS, self::class);
@@ -60,34 +66,34 @@ class Database {
      *
      * @param array $data
      * @param string $table
-     * @return integer
+     * @return int
      */
-    public function create(array $data, string $table = ""): int {
-
+    public function create(array $data, string $table = ""): int
+    {
         if (!empty($table)) {
             $this->table = $table;
         }
         
         $fields = array_keys($data);
-        $binds  = array_pad([], count($fields),'?');
+        $binds  = array_pad([], count($fields), '?');
 
         $sql = 'INSERT INTO ' .$this->table.' ('.implode(',', $fields).') VALUES ('.implode(',', $binds).')';
         $stm = $this->conn->prepare($sql);
 
         $stm->execute(array_values($data));
 
-        return $this->conn->lastInsertId();
+        return (int) $this->conn->lastInsertId();
     }
 
     /**
      * Generic update
      *
-     * @param integer $id
+     * @param int $id
      * @param array $data
-     * @return boolean
+     * @return bool
      */
-    public function update(int $id, array $data): bool {
-        
+    public function update(int $id, array $data): bool
+    {
         $setFields = implode('=?, ', array_keys($data));
 
         $sql = "UPDATE {$this->table} SET {$setFields}=? WHERE id = {$id}";
@@ -99,12 +105,11 @@ class Database {
     /**
      * Generic delete
      *
-     * @param integer $id
-     * @param string $table
-     * @return boolean
+     * @param int $id
+     * @return bool
      */
-    public function delete(int $id, string $table = ""): bool {
-    
+    public function delete(int $id): bool
+    {
         $query   = "DELETE FROM {$this->table} WHERE id = :id";
         $prepare = $this->conn->prepare($query);
 
@@ -116,11 +121,11 @@ class Database {
     /**
      * Used only sales
      *
-     * @param integer $saleId
-     * @return boolean
+     * @param int $saleId
+     * @return bool
      */
-    public function deleteItem(int $saleId): bool {
-    
+    public function deleteItem(int $saleId): bool
+    {
         $query   = "DELETE FROM sales_item WHERE sale_id = :saleId";
         $prepare = $this->conn->prepare($query);
 

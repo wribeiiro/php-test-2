@@ -1,13 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\System\Controller;
-use App\Repositories\SalesRepository;
 use App\Validations\SalesValidation;
+use App\Repositories\SalesRepository;
 use App\Validations\SalesItemValidation;
 
-class SalesService extends Controller {
+class SalesService extends Controller
+{
 
     /**
      * @var SalesRepository
@@ -19,20 +22,23 @@ class SalesService extends Controller {
         $this->sales_repository = new SalesRepository();
     }
 
-    public function getAll() {
+    public function getAll()
+    {
         return $this->sales_repository->get();
     }
 
-    public function getItems(int $id) {
+    public function getItems(int $id)
+    {
         return $this->sales_repository->getItems($id);
     }
 
-    public function getById(int $id) {
+    public function getById(int $id)
+    {
         return $this->sales_repository->get($id);
     }
 
-    public function create(array $data) {
-
+    public function create(array $data)
+    {
         $this->validate = (new SalesValidation())->makeValidation($data);
 
         if ($this->validate !== null) {
@@ -56,20 +62,19 @@ class SalesService extends Controller {
         return $result;
     }
 
-    public function createItem(array $data) {
-
+    public function createItem(array $data)
+    {
         $this->validate = (new SalesItemValidation())->makeValidation($data);
 
         if ($this->validate !== null) {
             return $this->validate;
         }
 
-        $result = $this->sales_repository->createItem($data);
-
-        return $result;
+        return $this->sales_repository->createItem($data);
     }
 
-    public function update(array $data, int $id) {
+    public function update(array $data, int $id)
+    {
         $this->validate = (new SalesValidation())->makeValidation($data);
 
         if ($this->validate !== null) {
@@ -78,19 +83,20 @@ class SalesService extends Controller {
 
         try {
             $sale = $this->sales_repository->update($id, $data);
-        } catch (\Exception $e) {
-            $sale = $e->getMessage();
+        } catch (\Exception $except) {
+            $sale = $except->getMessage();
         }
 
         return $sale;
     }
 
-    public function delete(int $id) {
+    public function delete(int $id)
+    {
         try {
             $sale = $this->sales_repository->delete($id);
             $this->sales_repository->deleteItem($id);
-        } catch (\Exception $e) {
-            $sale = $e->getMessage();
+        } catch (\Exception $except) {
+            $sale = $except->getMessage();
         }
 
         return $sale;
