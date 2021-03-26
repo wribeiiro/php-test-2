@@ -4,7 +4,7 @@ Small registration developed for testing.
 You can check the project running with mysql database [click me :D](https://wribeiiro.com/php-test-2)
 
 # Screenshot
-![image](https://user-images.githubusercontent.com/20648572/112701586-169a7700-8ea2-11eb-92e8-b53176f6762c.png)
+![image](https://user-images.githubusercontent.com/20648572/112701746-827cdf80-8ea2-11eb-8d9c-1fcc7abda42b.png)
 
 ### Functionalities
 
