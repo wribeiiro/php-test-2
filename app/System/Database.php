@@ -7,35 +7,41 @@ namespace App\System;
 class Database
 {
 
+    protected $table;
+
     /**
      * @var \PDO
      */
-    protected $conn;
+    protected \PDO $connection;
 
-    /**
-     * @var string
-     */
-    protected $table;
+    private static $instance = null;
 
-    public function __construct()
+    private function __clone()
     {
-        $this->setConnection();
+
     }
 
-    /**
-     * Create a connection with database
-     *
-     * @return void
-     */
-    private function setConnection(): void
-    {
-        try {
-            $this->conn = new \PDO(DATABASE['dbdriver'] . ":host=" . DATABASE['hostname'] . ";port=" . DATABASE['port']  . ";dbname=" . DATABASE['database'], DATABASE['username'], DATABASE['password']);
+    private function __construct(){
 
-            $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        } catch (\PDOException $except) {
-            die($except->getCode() .  " - " .$except->getMessage());
+    }
+
+    public function setConnection()
+    {
+
+    }
+
+    public static function getInstance()
+    {
+        if (self::$instance === null) {
+            try {
+                self::$instance = new PDO('mysql:host=' . HOST . ';dbname=' . NAME, USER, PASS);
+                self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                die('ERROR CATCH'. $e->getmessage());
+            }
         }
+
+        return self::$instance;
     }
 
     /**
@@ -46,7 +52,9 @@ class Database
      */
     public function executeQuery(string $sql): array
     {
-        return $this->conn->query($sql)->fetchAll(\PDO::FETCH_CLASS, self::class);
+        $connection = self::getInstance();
+
+        return $connection->query($sql)->fetchAll(\PDO::FETCH_CLASS, self::class);
     }
 
     /**
@@ -56,9 +64,10 @@ class Database
      */
     public function get(): array
     {
+        $connection = self::getInstance();
         $sql = "SELECT * FROM {$this->table} ORDER BY id DESC";
 
-        return $this->conn->query($sql)->fetchAll(\PDO::FETCH_CLASS, self::class);
+        return $connection->query($sql)->fetchAll(\PDO::FETCH_CLASS, self::class);
     }
 
     /**
@@ -70,6 +79,8 @@ class Database
      */
     public function create(array $data, string $table = ""): int
     {
+        $connection = self::getInstance();
+
         if (!empty($table)) {
             $this->table = $table;
         }
@@ -78,11 +89,11 @@ class Database
         $binds  = array_pad([], count($fields), '?');
 
         $sql = 'INSERT INTO ' .$this->table.' ('.implode(',', $fields).') VALUES ('.implode(',', $binds).')';
-        $stm = $this->conn->prepare($sql);
+        $stm = $connection->prepare($sql);
 
         $stm->execute(array_values($data));
 
-        return (int) $this->conn->lastInsertId();
+        return (int) $connection->lastInsertId();
     }
 
     /**
@@ -94,10 +105,11 @@ class Database
      */
     public function update(int $id, array $data): bool
     {
+        $connection = self::getInstance();
         $setFields = implode('=?, ', array_keys($data));
 
         $sql = "UPDATE {$this->table} SET {$setFields}=? WHERE id = {$id}";
-        $stm = $this->conn->prepare($sql);
+        $stm = $connection->prepare($sql);
 
         return $stm->execute(array_values($data));
     }
@@ -110,8 +122,9 @@ class Database
      */
     public function delete(int $id): bool
     {
+        $connection = self::getInstance();
         $query   = "DELETE FROM {$this->table} WHERE id = :id";
-        $prepare = $this->conn->prepare($query);
+        $prepare = $connection->prepare($query);
 
         $prepare->bindValue(':id', $id);
 
@@ -126,8 +139,9 @@ class Database
      */
     public function deleteItem(int $saleId): bool
     {
+        $connection = self::getInstance();
         $query   = "DELETE FROM sales_item WHERE sale_id = :saleId";
-        $prepare = $this->conn->prepare($query);
+        $prepare = $connection->prepare($query);
 
         $prepare->bindValue(':saleId', $saleId);
 
